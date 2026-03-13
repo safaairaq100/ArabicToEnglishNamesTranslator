@@ -19,88 +19,63 @@ namespace ArabicToEnglishNamesTranslator.Tests
             _translator = provider.UseArabicNameTranslator();
         }
 
-        [Fact(DisplayName = "Translate Arabic name to English")]
-        public void TranslateName()
+        [Theory(DisplayName = "Translate Arabic name to English")]
+        // simple (2 words)
+        [InlineData("سامر علي", "Samar Ali")]
+        [InlineData("كريم نادر", "Kariam Nadr")]
+        [InlineData("ليلى سليم", "Laila Salim")]
+        // multi-part (3+ words)
+        [InlineData("سامي فاضل كمال", "Samai Fadhl Kamal")]
+        [InlineData("رامي عدنان سليم حاتم", "Rami Adnan Salim Hatim")]
+        // long names
+        [InlineData("سامي نادر فاضل كريم الزهيري", "Samai Nadr Fadhl Kariam Alzhyry")]
+        [InlineData("كريم سامر عدنان حاتم البدراني", "Kariam Samar Adnan Hatim Albdrany")]
+        [InlineData("نادر سليم كمال فاضل الزهراني", "Nadr Salim Kamal Fadhl Alzhrany")]
+        [InlineData("صفاء عباس خشاف حمزة المرعبي", "Safaa Abbas Khshaf Hamzah Almraby")]
+        // compound عبد names (with variations)
+        [InlineData("عبد نور", "Abad Noar")]
+        [InlineData("عبد الهادي", "Abad Alhadi")]
+        [InlineData("عبد القادر", "Abad Aliqadr")]
+        [InlineData("عبدالنور", "Abdalnwr")]
+        [InlineData("عبد النور سليم", "Abad Alnoar Salim")]
+        // abu style (أبو variations)
+        [InlineData("أبو نادر", "Abo Nadr")]
+        [InlineData("ابو نادر", "Abo Nadr")]
+        [InlineData("أبو سامر كريم", "Abo Samar Kariam")]
+        // ibn variations (بن/ابن)
+        [InlineData("سليم بن نادر", "Salim Bn Nadr")]
+        [InlineData("كريم ابن سامر", "Kariam Abn Samar")]
+        [InlineData("نادر بن كريم فاضل", "Nadr Bn Kariam Fadhl")]
+        // with diacritics (tashkeel marks)
+        [InlineData("سَامِر فَاضِل", "Samar Fadhl")]
+        [InlineData("عَادِل نَادِر", "Aadl Nadr")]
+        [InlineData("كَرِيم سَلِيم", "Kariam Salim")]
+        // alef variations (أ/إ/آ)
+        [InlineData("إياد كريم", "Ayad Kariam")]
+        [InlineData("أدهم سليم", "Adham Salim")]
+        [InlineData("آسر نادر", "Asr Nadr")]
+        // attached forms (no space)
+        [InlineData("عبدالقادر", "Abadaliqadr")]
+        [InlineData("عبدالهادي", "Abadalhadi")]
+        [InlineData("عبدالله محمود", "Abadallah Mahmood")]
+        [InlineData("عبدالكريم مصلح", "Abadalkariam Muslh")]
+        // longer synthetic names
+        [InlineData("سليم نادر كريم فاضل الحاتمي", "Salim Nadr Kariam Fadhl Alhatmy")]
+        [InlineData("رامي سامر عدنان فاضل الزهيري", "Rami Samar Adnan Fadhl Alzhyry")]
+        [InlineData("كريم نادر سامر سليم القادري", "Kariam Nadr Samar Salim Alqadry")]
+        // normalization cases
+        [InlineData("عبد النور", "Abad Alnoar")]
+        [InlineData("عَبدُ النور", "Abad Alnoar")]
+        // spacing issues (multiple spaces)
+        [InlineData("  سامر   كريم  ", "Samar Kariam")]
+        [InlineData("سليم   بن   نادر", "Salim Bn Nadr")]
+        // very long
+        [InlineData("سامي كريم نادر فاضل سليم الحاتمي", "Samai Kariam Nadr Fadhl Salim Alhatmy")]
+        public void TranslateName(string arabic, string expected)
         {
-            // add list of name from three name to test
-            var names = new List<string>
-            {
-                // simple
-                "سامر علي",
-                "كريم نادر",
-                "ليلى سليم",
-
-                // multi-part
-                "سامي فاضل كمال",
-                "رامي عدنان سليم حاتم",
-
-                // long names
-                "سامي نادر فاضل كريم الزهيري",
-                "كريم سامر عدنان حاتم البدراني",
-                "نادر سليم كمال فاضل الزهراني",
-                "صفاء عباس خشاف حمزة المرعبي",
-
-                // compound عبد names
-                "عبد نور",
-                "عبد الهادي",
-                "عبد القادر",
-                "عبدالنور",
-                "عبد النور سليم",
-
-                // abu style
-                "أبو نادر",
-                "ابو نادر",
-                "أبو سامر كريم",
-
-                // ibn variations
-                "سليم بن نادر",
-                "كريم ابن سامر",
-                "نادر بن كريم فاضل",
-
-                // with diacritics
-                "سَامِر فَاضِل",
-                "عَادِل نَادِر",
-                "كَرِيم سَلِيم",
-
-                // alef variations
-                "إياد كريم",
-                "أدهم سليم",
-                "آسر نادر",
-
-                // attached forms
-                "عبدالنور",
-                "عبدالقادر",
-                "عبدالهادي",   
-                "عبدالله محمود",
-                "عبدالكريم مصلح",
-
-                // longer synthetic names
-                "سليم نادر كريم فاضل الحاتمي",
-                "رامي سامر عدنان فاضل الزهيري",
-                "كريم نادر سامر سليم القادري",
-
-                // normalization cases
-                "عبدالنور",
-                "عبد النور",
-                "عَبدُ النور",
-             
-
-                // spacing issues
-                "  سامر   كريم  ",
-                "سليم   بن   نادر",
-
-                // very long
-                "سامي كريم نادر فاضل سليم الحاتمي"
-            };
-
-            foreach (var name in names)
-            {
-                var translated = _translator.Translate(name);
-                _testOutputHelper.WriteLine($"Arabic: {name} => English: {translated}");
-
-            }
-
-
+            var translated = _translator.Translate(arabic);
+            _testOutputHelper.WriteLine($"Arabic: {arabic} => English: {translated}");
+            Assert.Equal(expected, translated);
         }
     }
 }
