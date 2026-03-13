@@ -70,7 +70,9 @@ namespace ArabicToEnglishNamesTranslator.Tests
                 // attached forms
                 "عبدالنور",
                 "عبدالقادر",
-                "عبدالهادي",
+                "عبدالهادي",   
+                "عبدالله محمود",
+                "عبدالكريم مصلح",
 
                 // longer synthetic names
                 "سليم نادر كريم فاضل الحاتمي",
@@ -81,6 +83,7 @@ namespace ArabicToEnglishNamesTranslator.Tests
                 "عبدالنور",
                 "عبد النور",
                 "عَبدُ النور",
+             
 
                 // spacing issues
                 "  سامر   كريم  ",
