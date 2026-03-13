@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArabicToEnglishNamesTranslator", "ArabicToEnglishNamesTranslator\ArabicToEnglishNamesTranslator.csproj", "{A255B2DA-311B-4C0D-8598-028AAA43EBCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArabicToEnglishNamesTranslator", "ArabicToEnglishNamesTranslator\ArabicToEnglishNamesTranslator.csproj", "{A255B2DA-311B-4C0D-8598-028AAA43EBCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArabicToEnglishNamesTranslator.Tests", "ArabicToEnglishNamesTranslator.Tests\ArabicToEnglishNamesTranslator.Tests.csproj", "{35259997-E400-4BF5-A1DC-3B0569788B66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A255B2DA-311B-4C0D-8598-028AAA43EBCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A255B2DA-311B-4C0D-8598-028AAA43EBCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A255B2DA-311B-4C0D-8598-028AAA43EBCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35259997-E400-4BF5-A1DC-3B0569788B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35259997-E400-4BF5-A1DC-3B0569788B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35259997-E400-4BF5-A1DC-3B0569788B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35259997-E400-4BF5-A1DC-3B0569788B66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
