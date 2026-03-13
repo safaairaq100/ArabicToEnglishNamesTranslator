@@ -4,17 +4,26 @@ using ArabicToEnglishNamesTranslator.Core;
 
 namespace ArabicToEnglishNamesTranslator.Services;
 
+/// <summary>
+/// Translates Arabic names to their English (romanized) equivalents using a built-in
+/// dictionary and phonetic transliteration fallback.
+/// </summary>
 public class ArabicNameTranslator : IArabicNameTranslator
 {
     private readonly Dictionary<string, string> _nameDictionary;
     private readonly Dictionary<char, string> _letters;
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="ArabicNameTranslator"/>,
+    /// loading the embedded name dictionary and letter map.
+    /// </summary>
     public ArabicNameTranslator()
     {
         _nameDictionary = ArabicNameDictionary.Load();
         _letters = ArabicLetterMap.Map;
     }
 
+    /// <inheritdoc />
     public string Translate(string arabicName)
     {
         if (string.IsNullOrWhiteSpace(arabicName))

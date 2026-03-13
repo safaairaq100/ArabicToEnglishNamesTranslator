@@ -1,7 +1,13 @@
 ﻿namespace ArabicToEnglishNamesTranslator.Core;
 
+/// <summary>
+/// Provides a mapping from Arabic characters to their phonetic English equivalents.
+/// </summary>
 public static class ArabicLetterMap
 {
+    /// <summary>
+    /// A dictionary mapping each Arabic letter to its phonetic English transliteration.
+    /// </summary>
     public static readonly Dictionary<char, string> Map = new()
     {
         ['ا'] = "a",
