@@ -7,8 +7,9 @@
 
     <!-- NuGet Package Metadata -->
     <PackageId>ArabicToEnglishNamesTranslator</PackageId>
+    <Title>Arabic To English Names Translator</Title>
     <Version>1.0.0</Version>
-    <Authors>safaairaq100</Authors>
+    <Authors>Safaa Abbas</Authors>
     <Description>A .NET library for translating Arabic names to their English (romanized) equivalents. Includes a built-in dictionary of 2,500+ common Arabic names and falls back to phonetic character-by-character transliteration. Provides Microsoft.Extensions.DependencyInjection integration.</Description>
     <PackageTags>arabic;english;translation;transliteration;names;localization;arabic-names</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
