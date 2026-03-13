@@ -3,8 +3,15 @@ using System.Text.Json;
 
 namespace ArabicToEnglishNamesTranslator.Core;
 
+/// <summary>
+/// Loads the embedded Arabic-to-English name dictionary from the assembly resources.
+/// </summary>
 public static class ArabicNameDictionary
 {
+    /// <summary>
+    /// Loads the Arabic-to-English name dictionary from the embedded JSON resource.
+    /// </summary>
+    /// <returns>A dictionary mapping normalized Arabic name strings to their English equivalents.</returns>
     public static Dictionary<string, string> Load()
     {
         var assembly = Assembly.GetExecutingAssembly();
