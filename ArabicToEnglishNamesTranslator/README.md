@@ -1,64 +1,138 @@
 ﻿# ArabicToEnglishNamesTranslator
 
-A .NET library for translating Arabic names to their English (romanized) equivalents.
+A .NET 8 library for translating Arabic names to their English phonetic equivalents. It uses a built-in dictionary of over 2,500 common Arabic names for exact matches and falls back to character-by-character transliteration for names not in the dictionary.
 
 ## Features
 
-- Built-in dictionary of **2,500+ common Arabic names** for accurate translations
-- Phonetic **character-by-character transliteration** fallback for unknown names
-- Handles **diacritical marks** (tashkeel) and common letter variants (أ / إ / آ → a)
-- Supports **multi-word names** (e.g. full names with عبد, أبو, ابن prefixes)
-- Microsoft.Extensions.**DependencyInjection** integration
+- Translates Arabic names to English using a dictionary of 2,500+ common names
+- Falls back to phonetic transliteration for unknown names
+- Normalizes Arabic diacritical marks (tashkeel) and character variations (e.g. أ / إ / آ → ا)
+- Handles compound names, multi-word names, and names with prefixes such as عبد (Abd) and أبو (Abu)
+- Supports Microsoft Dependency Injection out of the box
 
 ## Installation
 
-```
+Install the package from [NuGet](https://www.nuget.org/packages/ArabicToEnglishNamesTranslator):
+
+### .NET CLI
+
+```bash
 dotnet add package ArabicToEnglishNamesTranslator
+```
+
+### Package Manager Console
+
+```powershell
+Install-Package ArabicToEnglishNamesTranslator
+```
+
+### PackageReference (in your `.csproj`)
+
+```xml
+<PackageReference Include="ArabicToEnglishNamesTranslator" Version="1.0.0" />
 ```
 
 ## Usage
 
-### Without dependency injection
+### Without Dependency Injection
+
+Instantiate `ArabicNameTranslator` directly:
 
 ```csharp
 using ArabicToEnglishNamesTranslator.Services;
 
 var translator = new ArabicNameTranslator();
 
-string english = translator.Translate("محمد");       // "Muhammad"
-string full    = translator.Translate("عبد الله");   // "Abdullah"
+string english = translator.Translate("سامر علي");
+Console.WriteLine(english); // Output: Samer Ali
+
+string compound = translator.Translate("عبد القادر");
+Console.WriteLine(compound); // Output: Abd Al-Qadir
 ```
 
-### With Microsoft.Extensions.DependencyInjection
+### With Dependency Injection (ASP.NET Core / Generic Host)
 
-Register the translator in your service collection:
+Register the translator in your service collection using the provided extension method:
 
 ```csharp
 using ArabicToEnglishNamesTranslator.DependencyInjection;
 
-services.AddArabicNameTranslator();
+var builder = WebApplication.CreateBuilder(args);
+
+// Register the translator as a singleton
+builder.Services.AddArabicNameTranslator();
 ```
 
-Resolve and use it:
+Then inject `IArabicNameTranslator` wherever you need it:
+
+```csharp
+using ArabicToEnglishNamesTranslator.Abstractions;
+
+public class MyService
+{
+    private readonly IArabicNameTranslator _translator;
+
+    public MyService(IArabicNameTranslator translator)
+    {
+        _translator = translator;
+    }
+
+    public string GetEnglishName(string arabicName)
+    {
+        return _translator.Translate(arabicName);
+    }
+}
+```
+
+You can also resolve the translator directly from an `IServiceProvider`:
 
 ```csharp
 using ArabicToEnglishNamesTranslator.DependencyInjection;
 
 var translator = serviceProvider.UseArabicNameTranslator();
-string english = translator.Translate("فاطمة"); // "Fatima"
+string result = translator.Translate("أحمد محمد");
 ```
 
-Or inject `IArabicNameTranslator` directly into your classes:
+## API Reference
+
+### `IArabicNameTranslator`
 
 ```csharp
-using ArabicToEnglishNamesTranslator.Abstractions;
-
-public class MyService(IArabicNameTranslator translator)
+namespace ArabicToEnglishNamesTranslator.Abstractions
 {
-    public string GetEnglishName(string arabicName) => translator.Translate(arabicName);
+    public interface IArabicNameTranslator
+    {
+        /// <summary>
+        /// Translates an Arabic name to its English phonetic equivalent.
+        /// </summary>
+        /// <param name="arabicName">The Arabic name to translate.</param>
+        /// <returns>The English transliteration of the name.</returns>
+        string Translate(string arabicName);
+    }
 }
 ```
 
+### `ServiceCollectionExtensions`
+
+| Method | Description |
+|--------|-------------|
+| `AddArabicNameTranslator(this IServiceCollection)` | Registers `IArabicNameTranslator` as a singleton in the DI container. |
+| `UseArabicNameTranslator(this IServiceProvider)` | Resolves and returns the registered `IArabicNameTranslator` instance. |
+
+## Examples
+
+| Arabic Name | English Translation |
+|-------------|---------------------|
+| سامر علي | Samer Ali |
+| عبد القادر | Abd Al-Qadir |
+| أبو نادر | Abu Nader |
+| محمد إبراهيم | Mohammed Ibrahim |
+| فاطمة الزهراء | Fatima Al-Zahraa |
+
+## Requirements
+
+- .NET 8.0 or later
+
 ## License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the terms included in the repository. See the [LICENSE](LICENSE) file for details.
