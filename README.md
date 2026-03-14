@@ -123,11 +123,11 @@ namespace ArabicToEnglishNamesTranslator.Abstractions
 
 | Arabic Name | English Translation |
 |-------------|---------------------|
-| سامر علي | Samar Ali |
-| عبد القادر | Abd Alqadr |
-| أبو نادر | Abo Nadr |
-| محمد إبراهيم | Mohamed Ibrahim |
-| فاطمة الزهراء | Fatma Alzhraa |
+| سامر علي | Samer Ali |
+| عبد القادر | Abd Al-Qadir |
+| أبو نادر | Abu Nader |
+| محمد إبراهيم | Mohammed Ibrahim |
+| فاطمة الزهراء | Fatima Al-Zahraa |
 
 ## Requirements
 
