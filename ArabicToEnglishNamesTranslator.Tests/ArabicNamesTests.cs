@@ -75,10 +75,6 @@ namespace ArabicToEnglishNamesTranslator.Tests
         {
             var translated = _translator.Translate(arabic);
             _testOutputHelper.WriteLine($"Arabic: {arabic} => English: {translated}");  
-            
-            var arabic1= " فاطمة الزهراء ";
-            var translated1 = _translator.Translate(arabic1);
-            _testOutputHelper.WriteLine($"Arabic: {arabic1} => English: {translated1}");
             Assert.Equal(expected, translated);
         }
     }
