@@ -44,10 +44,10 @@ using ArabicToEnglishNamesTranslator.Services;
 var translator = new ArabicNameTranslator();
 
 string english = translator.Translate("سامر علي");
-Console.WriteLine(english); // Output: Samar Ali
+Console.WriteLine(english); // Output: Samer Ali
 
 string compound = translator.Translate("عبد القادر");
-Console.WriteLine(compound); // Output: Abd Alqadr
+Console.WriteLine(compound); // Output: Abd Al-Qadir
 ```
 
 ### With Dependency Injection (ASP.NET Core / Generic Host)
