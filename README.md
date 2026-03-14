@@ -44,10 +44,10 @@ using ArabicToEnglishNamesTranslator.Services;
 var translator = new ArabicNameTranslator();
 
 string english = translator.Translate("سامر علي");
-Console.WriteLine(english); // Output: Samar Ali
+Console.WriteLine(english); // Output: Samer Ali
 
 string compound = translator.Translate("عبد القادر");
-Console.WriteLine(compound); // Output: Abd Alqadr
+Console.WriteLine(compound); // Output: Abd Al-Qadir
 ```
 
 ### With Dependency Injection (ASP.NET Core / Generic Host)
@@ -123,11 +123,11 @@ namespace ArabicToEnglishNamesTranslator.Abstractions
 
 | Arabic Name | English Translation |
 |-------------|---------------------|
-| سامر علي | Samar Ali |
-| عبد القادر | Abd Alqadr |
-| أبو نادر | Abo Nadr |
-| محمد إبراهيم | Mohamed Ibrahim |
-| فاطمة الزهراء | Fatma Alzhraa |
+| سامر علي | Samer Ali |
+| عبد القادر | Abd Al-Qadir |
+| أبو نادر | Abu Nader |
+| محمد إبراهيم | Mohammed Ibrahim |
+| فاطمة الزهراء | Fatima Al-Zahraa |
 
 ## Requirements
 
